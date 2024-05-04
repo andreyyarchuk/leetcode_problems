@@ -3,15 +3,14 @@
  * @return {Function}
  */
 function memoize(fn) {
-	let cache = {}
+	const cached = {}
 	return function (...args) {
-		let key = JSON.stringify(args)
-		if (key in cache) {
-			return cache[key]
+		let key = String(args)
+		if (key in cached) {
+			return cached[key]
 		}
-		let result = fn.apply(this, args)
-		cache[key] = result
-
+		let result = fn(...args)
+		cached[key] = result
 		return result
 	}
 }
